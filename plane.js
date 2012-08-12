@@ -14,10 +14,10 @@ var PLANE = (function(x, y, rotation) {
 
 	self.draw = function(context) {
 		context.save();
-		context.translate(x, y);
+		context.translate(this.x, this.y);
 
 		if (rotation != 0) {
-			context.rotate(rotation);
+			context.rotate(this.rotation);
 		}
 
 		context.beginPath();
