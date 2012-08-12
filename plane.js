@@ -34,6 +34,11 @@ var PLANE = (function(x, y, rotation) {
 		context.moveTo(-ELEVATOR_LENGTH / 2, fuselageEndY - ELEVATOR_BACK_OFFSET);
 		context.lineTo(ELEVATOR_LENGTH / 2, fuselageEndY - ELEVATOR_BACK_OFFSET);
 
+		context.shadowOffsetX = 15;
+		context.shadowOffsetY = 15;
+		context.shadowBlur = 8;
+		context.shadowColor = 'rgba(0, 0, 0, 1)';
+
 		context.stroke();
 		context.restore();
 	}
