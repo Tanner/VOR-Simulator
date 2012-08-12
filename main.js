@@ -1,5 +1,11 @@
 var vor = null;
 
+(function() {
+	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                              window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+	window.requestAnimationFrame = requestAnimationFrame;
+})();
+
 $(document).ready(function() {
 	if (!isCanvasSupported()) {
 		$("#no-canvas").removeClass("hidden");
@@ -11,8 +17,17 @@ $(document).ready(function() {
 	canvasContext = $("#canvas")[0].getContext('2d');
 
 	vor = new VOR($(window).width() / 2, $(window).height() / 2);
+
+	requestAnimationFrame(draw);
+});
+
+function draw() {
+	canvasContext.clearRect($("#canvas").width(), $("#canvas").height());
+
 	vor.draw(canvasContext);
-})
+
+	requestAnimationFrame(draw);
+}
 
 $(window).bind("resize", function() {
 	sizeCanvas();
