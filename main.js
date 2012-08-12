@@ -5,6 +5,11 @@ $(document).ready(function() {
 	}
 
 	sizeCanvas();
+
+	canvasContext = $("#canvas")[0].getContext('2d');
+
+	var vor = new VOR(100, 100);
+	vor.draw(canvasContext);
 })
 
 $(window).bind("resize", function() {
