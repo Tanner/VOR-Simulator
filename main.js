@@ -4,7 +4,7 @@ $(document).ready(function() {
 		return;
 	}
 
-	resize();
+	sizeCanvas();
 })
 
 $(window).bind("resize", function() {
