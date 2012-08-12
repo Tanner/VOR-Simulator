@@ -22,7 +22,7 @@ $(document).ready(function() {
 	canvasContext = $("#canvas")[0].getContext('2d');
 
 	vor = new VOR($(window).width() / 2, $(window).height() / 2);
-	plane = new PLANE(500, 500, Math.PI * 0.32);
+	plane = new PLANE($(window).width() / 3, $(window).height() / 3, 0);
 
 	$("#canvas").bind("click", onClick);
 	$("#canvas").bind("mousemove", onMouseMove);
