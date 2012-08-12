@@ -15,13 +15,17 @@ $(document).ready(function() {
 
 	sizeCanvas();
 
-	$("#canvas").bind("click", onClick);
-	$("#canvas").bind("mousemove", onMouseMove);
+	$(window).bind("resize", function() {
+		sizeCanvas();
+	});
 
 	canvasContext = $("#canvas")[0].getContext('2d');
 
 	vor = new VOR($(window).width() / 2, $(window).height() / 2);
 	plane = new PLANE(500, 500, Math.PI * 0.32);
+
+	$("#canvas").bind("click", onClick);
+	$("#canvas").bind("mousemove", onMouseMove);
 
 	requestAnimationFrame(draw);
 });
@@ -46,10 +50,6 @@ function onMouseMove(event) {
 		plane.move(event.pageX, event.pageY);
 	}
 }
-
-$(window).bind("resize", function() {
-	sizeCanvas();
-});
 
 function isCanvasSupported() {
   var elem = document.createElement('canvas');
