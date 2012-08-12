@@ -18,7 +18,7 @@ $(document).ready(function() {
 	canvasContext = $("#canvas")[0].getContext('2d');
 
 	vor = new VOR($(window).width() / 2, $(window).height() / 2);
-	plane = new PLANE(500, 500, 0);
+	plane = new PLANE(500, 500, Math.PI * 0.32);
 
 	requestAnimationFrame(draw);
 });

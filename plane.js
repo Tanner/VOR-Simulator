@@ -13,21 +13,29 @@ var PLANE = (function(x, y, rotation) {
 	self.rotation = rotation;
 
 	self.draw = function(context) {
+		context.save();
+		context.translate(x, y);
+
+		if (rotation != 0) {
+			context.rotate(rotation);
+		}
+
 		context.beginPath();
 
-		var fuselageStartY = y - WING_FRONT_OFFSET;
-		var fuselageEndY = y + (FUSELAGE_LENGTH - WING_FRONT_OFFSET);
+		var fuselageStartY = -WING_FRONT_OFFSET;
+		var fuselageEndY = FUSELAGE_LENGTH - WING_FRONT_OFFSET;
 		
-		context.moveTo(x, fuselageStartY);
-		context.lineTo(x, fuselageEndY);
+		context.moveTo(0, fuselageStartY);
+		context.lineTo(0, fuselageEndY);
 
-		context.moveTo(x - WING_LENGTH / 2, y);
-		context.lineTo(x + WING_LENGTH / 2, y);
+		context.moveTo(-WING_LENGTH / 2, 0);
+		context.lineTo(WING_LENGTH / 2, 0);
 
-		context.moveTo(x - ELEVATOR_LENGTH / 2, fuselageEndY - ELEVATOR_BACK_OFFSET);
-		context.lineTo(x + ELEVATOR_LENGTH / 2, fuselageEndY - ELEVATOR_BACK_OFFSET);
+		context.moveTo(-ELEVATOR_LENGTH / 2, fuselageEndY - ELEVATOR_BACK_OFFSET);
+		context.lineTo(ELEVATOR_LENGTH / 2, fuselageEndY - ELEVATOR_BACK_OFFSET);
 
 		context.stroke();
+		context.restore();
 	}
 
 	return self;
