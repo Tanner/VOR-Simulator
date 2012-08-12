@@ -1,3 +1,5 @@
+var vor = null;
+
 $(document).ready(function() {
 	if (!isCanvasSupported()) {
 		$("#no-canvas").removeClass("hidden");
@@ -8,7 +10,7 @@ $(document).ready(function() {
 
 	canvasContext = $("#canvas")[0].getContext('2d');
 
-	var vor = new VOR(100, 100);
+	vor = new VOR($(window).width() / 2, $(window).height() / 2);
 	vor.draw(canvasContext);
 })
 
