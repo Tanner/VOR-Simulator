@@ -38,5 +38,10 @@ var PLANE = (function(x, y, rotation) {
 		context.restore();
 	}
 
+	self.move = function(x, y) {
+		self.x = x;
+		self.y = y;
+	}
+
 	return self;
 });

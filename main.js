@@ -15,6 +15,9 @@ $(document).ready(function() {
 
 	sizeCanvas();
 
+	$("#canvas").bind("click", onClick);
+	$("#canvas").bind("mousemove", onMouseMove);
+
 	canvasContext = $("#canvas")[0].getContext('2d');
 
 	vor = new VOR($(window).width() / 2, $(window).height() / 2);
@@ -30,6 +33,18 @@ function draw() {
 	plane.draw(canvasContext);
 
 	requestAnimationFrame(draw);
+}
+
+function onClick(event) {
+	if (event.which == 1) {
+		plane.move(event.pageX, event.pageY);
+	}
+}
+
+function onMouseMove(event) {
+	if (event.which == 1) {
+		plane.move(event.pageX, event.pageY);
+	}
 }
 
 $(window).bind("resize", function() {
