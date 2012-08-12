@@ -1,4 +1,5 @@
 var vor = null;
+var plane = null;
 
 (function() {
 	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
@@ -17,6 +18,7 @@ $(document).ready(function() {
 	canvasContext = $("#canvas")[0].getContext('2d');
 
 	vor = new VOR($(window).width() / 2, $(window).height() / 2);
+	plane = new PLANE(500, 500, 0);
 
 	requestAnimationFrame(draw);
 });
@@ -25,6 +27,7 @@ function draw() {
 	canvasContext.clearRect(0, 0, $("#canvas").width(), $("#canvas").height());
 
 	vor.draw(canvasContext);
+	plane.draw(canvasContext);
 
 	requestAnimationFrame(draw);
 }
