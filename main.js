@@ -22,7 +22,7 @@ $(document).ready(function() {
 });
 
 function draw() {
-	canvasContext.clearRect($("#canvas").width(), $("#canvas").height());
+	canvasContext.clearRect(0, 0, $("#canvas").width(), $("#canvas").height());
 
 	vor.draw(canvasContext);
 
