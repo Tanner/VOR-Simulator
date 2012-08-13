@@ -8,6 +8,9 @@ var VOR = (function(x, y) {
 	self.y = y;
 
 	self.draw = function(context) {
+		context.fillStyle = '#000';
+		context.strokeStyle = '#000';
+
 		context.beginPath();
 		context.arc(x, y, DOT_RADIUS, 0, Math.PI * 2, true);
 		context.fill();

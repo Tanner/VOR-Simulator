@@ -15,6 +15,7 @@ var PLANE = (function(x, y, rotation) {
 	self.draw = function(context) {
 		context.save();
 		context.translate(this.x, this.y);
+		context.strokeStyle = '#000';
 
 		if (rotation != 0) {
 			context.rotate(this.rotation);
