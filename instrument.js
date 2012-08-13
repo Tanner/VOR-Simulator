@@ -20,6 +20,8 @@ var INSTRUMENT = (function(x, y) {
 	const FROM_TEXT = "FR";
 	const DIR_FONT_SIZE = 12;
 
+	const NUM_INNER_TICKS = 8;
+
 	const NUM_MAJOR_TICKS = 12;
 	const MAJOR_TICK_LENGTH = 7;
 	const TICK_TEXT_PADDING = 4;
@@ -51,22 +53,34 @@ var INSTRUMENT = (function(x, y) {
 		context.arc(centerX, centerY, smallRadius, 0, Math.PI * 2, false);
 		context.stroke();
 
-		// Draw inner marks
+		// Draw upper triangle
 		context.beginPath();
 
 		context.moveTo(centerX, centerY - smallRadius);
-		context.lineTo(centerX, centerY - smallRadius + INNER_MARK_LENGTH);
+		context.lineTo(centerX + INNER_MARK_LENGTH / 2, centerY - smallRadius + INNER_MARK_LENGTH);
+		context.lineTo(centerX - INNER_MARK_LENGTH / 2, centerY - smallRadius + INNER_MARK_LENGTH);
 
-		context.moveTo(centerX + smallRadius, centerY);
-		context.lineTo(centerX + smallRadius - INNER_MARK_LENGTH, centerY);
-
-		context.moveTo(centerX, centerY + smallRadius);
-		context.lineTo(centerX, centerY + smallRadius - INNER_MARK_LENGTH);
-
-		context.moveTo(centerX - smallRadius, centerY);
-		context.lineTo(centerX - smallRadius + INNER_MARK_LENGTH, centerY);
-
+		context.closePath();
 		context.stroke();
+
+		// Draw inner marks
+		context.save();
+		context.translate(centerX, centerY);
+
+		for (var i = 0; i < NUM_INNER_TICKS; i++) {
+			if (i == 0) {
+				continue;
+			}
+
+			context.rotate(Math.PI * 2 / NUM_INNER_TICKS);
+
+			context.beginPath();
+			context.moveTo(0, -smallRadius);
+			context.lineTo(0, -smallRadius + INNER_MARK_LENGTH);
+			context.stroke();
+		}
+
+		context.restore();
 
 		// Draw center dot
 		context.beginPath();
