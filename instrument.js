@@ -108,10 +108,10 @@ var INSTRUMENT = (function(x, y) {
 		context.lineTo(innerMarkX - TRIANGLE_WIDTH / 2, centerY - TRIANGLE_PADDING - TRIANGLE_HEIGHT);
 
 		context.closePath();
-		// context.stroke();
+		context.stroke();
 
 		// Draw FROM triangle
-		// context.beginPath();
+		context.beginPath();
 
 		context.moveTo(innerMarkX, centerY + TRIANGLE_PADDING);
 
@@ -174,8 +174,6 @@ var INSTRUMENT = (function(x, y) {
 		context.save();
 		context.translate(centerX, centerY - SMALL_RADIUS);
 
-		context.lineWidth = NEEDLE_WIDTH;
-
 		context.beginPath();
 		context.arc(0, SMALL_RADIUS, SMALL_RADIUS, 0, Math.PI * 2, false);
 		context.clip();
@@ -186,6 +184,13 @@ var INSTRUMENT = (function(x, y) {
 		context.moveTo(0, 0);
 		context.lineTo(0, NEEDLE_LENGTH);
 
+		context.lineWidth = NEEDLE_WIDTH;
+
+		context.shadowOffsetX = 5;
+		context.shadowOffsetY = 5;
+		context.shadowBlur = 12;
+		context.shadowColor = 'rgba(0, 0, 0, 1)';
+
 		context.stroke();
 
 		context.restore();
@@ -194,11 +199,16 @@ var INSTRUMENT = (function(x, y) {
 		context.beginPath();
 
 		context.fillStyle = "#FFF";
-		context.strokeStyle = "#000";
+		context.strokeStyle = "#FFF";
 
 		context.moveTo(centerX, centerY - SMALL_RADIUS);
 		context.lineTo(centerX + INNER_MARK_LENGTH / 2, centerY - SMALL_RADIUS + INNER_MARK_LENGTH);
 		context.lineTo(centerX - INNER_MARK_LENGTH / 2, centerY - SMALL_RADIUS + INNER_MARK_LENGTH);
+
+		context.shadowOffsetX = 0;
+		context.shadowOffsetY = 5;
+		context.shadowBlur = 12;
+		context.shadowColor = 'rgba(0, 0, 0, 1)';
 
 		context.closePath();
 		context.fill();
