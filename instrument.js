@@ -32,6 +32,12 @@ var INSTRUMENT = (function(x, y) {
 
 	const NEEDLE_LENGTH = SMALL_RADIUS * 2 - PADDING * 5;
 
+	const NEEDLE_ROTATION_MIN = Math.PI * 0.2;
+	const NEEDLE_ROTATION_MAX = Math.PI * -0.2;
+
+	const NEEDLE_ROTATION_INPUT_MIN = -10;
+	const NEEDLE_ROTATION_INPUT_MAX = 10;
+
 	self.x = x;
 	self.y = y;
 
@@ -161,7 +167,8 @@ var INSTRUMENT = (function(x, y) {
 		context.arc(0, SMALL_RADIUS, SMALL_RADIUS, 0, Math.PI * 2, false);
 		context.clip();
 
-		context.rotate(self.needleRotation);
+		var rotationAmount = map(self.needleRotation, NEEDLE_ROTATION_INPUT_MIN, NEEDLE_ROTATION_INPUT_MAX, NEEDLE_ROTATION_MIN, NEEDLE_ROTATION_MAX);
+		context.rotate(rotationAmount);
 
 		context.moveTo(0, 0);
 		context.lineTo(0, NEEDLE_LENGTH);
@@ -183,6 +190,15 @@ var INSTRUMENT = (function(x, y) {
 		context.closePath();
 		context.fill();
 		context.stroke();
+	}
+
+	function map(input, inputMin, inputMax, outputMin, outputMax) {
+		var inputSpan = inputMax - inputMin;
+		var outputSpan = outputMax - outputMin;
+
+		var inputScaled = (input - inputMin) / inputSpan;
+
+		return outputMin + (inputScaled * outputSpan);
 	}
 
 	return self;
