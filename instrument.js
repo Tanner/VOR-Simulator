@@ -21,7 +21,7 @@ var INSTRUMENT = (function(x, y) {
 	const DIR_FONT_SIZE = 12;
 
 	const NUM_MAJOR_TICKS = 12;
-	const MAJOR_TICK_LENGTH = 5;
+	const MAJOR_TICK_LENGTH = 7;
 	const TICK_TEXT_PADDING = 4;
 
 	self.x = x;
@@ -132,6 +132,7 @@ var INSTRUMENT = (function(x, y) {
 		context.save();
 		context.translate(centerX, centerY);
 
+		// Major
 		for (var i = 0; i < NUM_MAJOR_TICKS; i++) {
 			if (i != 0) {
 				context.rotate(Math.PI * 2 / NUM_MAJOR_TICKS);
@@ -142,7 +143,23 @@ var INSTRUMENT = (function(x, y) {
 			context.stroke();
 
 			var compassText = i * 360 / NUM_MAJOR_TICKS;
+			compassText = compassText.toString().substr(0, 2);
 			context.fillText(compassText, -context.measureText(compassText).width / 2, -smallRadius - MAJOR_TICK_LENGTH - TICK_TEXT_PADDING);
+		}
+
+		// Minor
+		for (var i = 0; i < NUM_MAJOR_TICKS * 4; i++) {
+			if (i != 0) {
+				context.rotate(Math.PI * 2 / (NUM_MAJOR_TICKS * 4));
+			}
+
+			if (i % (360 / NUM_MAJOR_TICKS) == 0) {
+				continue;
+			}
+
+			context.moveTo(0, -smallRadius);
+			context.lineTo(0, -smallRadius - MAJOR_TICK_LENGTH / 3);
+			context.stroke();
 		}
 
 		context.restore();
