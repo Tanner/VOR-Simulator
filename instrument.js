@@ -179,6 +179,8 @@ var INSTRUMENT = (function(x, y) {
 		context.arc(0, SMALL_RADIUS, SMALL_RADIUS, 0, Math.PI * 2, false);
 		context.clip();
 
+		context.beginPath();
+
 		var rotationAmount = map(self.needleRotation, NEEDLE_ROTATION_INPUT_MIN, NEEDLE_ROTATION_INPUT_MAX, NEEDLE_ROTATION_MIN, NEEDLE_ROTATION_MAX);
 		context.rotate(rotationAmount);
 
@@ -189,8 +191,8 @@ var INSTRUMENT = (function(x, y) {
 
 		context.shadowOffsetX = 5;
 		context.shadowOffsetY = 5;
-		context.shadowBlur = 12;
-		context.shadowColor = 'rgba(0, 0, 0, 1)';
+		context.shadowBlur = 30;
+		context.shadowColor = 'rgba(255, 255, 255, 1)';
 
 		context.stroke();
 
