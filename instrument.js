@@ -16,6 +16,10 @@ var INSTRUMENT = (function(x, y) {
 	const TRIANGLE_X_OFFSET = 15;
 	const TRIANGLE_PADDING = 10;
 
+	const TO_TEXT = "TO";
+	const FROM_TEXT = "FR";
+	const DIR_FONT_SIZE = 12;
+
 	self.x = x;
 	self.y = y;
 
@@ -109,6 +113,15 @@ var INSTRUMENT = (function(x, y) {
 		context.stroke();
 
 		// Draw labels for triangles
+		var textWidth;
+		context.fillStyle = "#000";
+		context.font = DIR_FONT_SIZE + "px Helvetica";
+
+		textWidth = context.measureText(TO_TEXT).width;
+		context.fillText(TO_TEXT, innerMarkX - TRIANGLE_WIDTH / 2 - textWidth / 2, centerY - TRIANGLE_PADDING - TRIANGLE_HEIGHT - TRIANGLE_PADDING / 2);
+
+		textWidth = context.measureText(FROM_TEXT).width;
+		context.fillText(FROM_TEXT, innerMarkX - TRIANGLE_WIDTH / 2 - textWidth / 2, centerY + TRIANGLE_PADDING + TRIANGLE_HEIGHT + DIR_FONT_SIZE);
 	}
 
 	return self;
