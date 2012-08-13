@@ -1,5 +1,6 @@
 var vor = null;
 var plane = null;
+var instrument = null;
 
 (function() {
 	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
@@ -23,6 +24,7 @@ $(document).ready(function() {
 
 	vor = new VOR($(window).width() / 2, $(window).height() / 2);
 	plane = new PLANE($(window).width() / 3, $(window).height() / 3, 0);
+	instrument = new INSTRUMENT(200, 200);
 
 	$("#canvas").bind("click", onClick);
 	$("#canvas").bind("mousemove", onMouseMove);
@@ -35,6 +37,7 @@ function draw() {
 
 	vor.draw(canvasContext);
 	plane.draw(canvasContext);
+	instrument.draw(canvasContext);
 
 	requestAnimationFrame(draw);
 }
