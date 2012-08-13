@@ -35,6 +35,8 @@ var INSTRUMENT = (function(x, y) {
 	self.x = x;
 	self.y = y;
 
+	self.needleRotation = 0;
+
 	self.draw = function(context) {
 		// Draw container box
 		context.fillStyle = '#FFF';
@@ -158,6 +160,8 @@ var INSTRUMENT = (function(x, y) {
 		context.beginPath();
 		context.arc(0, SMALL_RADIUS, SMALL_RADIUS, 0, Math.PI * 2, false);
 		context.clip();
+
+		context.rotate(self.needleRotation);
 
 		context.moveTo(0, 0);
 		context.lineTo(0, NEEDLE_LENGTH);
