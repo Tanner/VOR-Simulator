@@ -2,10 +2,13 @@ var INSTRUMENT = (function(x, y) {
 	var self = {};
 
 	const SIZE = 200;
-	const PADDING = 3;
+	const PADDING = 2;
 
+	const NUMBER_GAP = 30;
+
+	const CONTAINER_RADIUS = SIZE / 2;
 	const LARGE_RADIUS = SIZE / 2 - PADDING * 2;
-	const SMALL_RADIUS = LARGE_RADIUS - 12 * 2;
+	const SMALL_RADIUS = LARGE_RADIUS - NUMBER_GAP;
 
 	const INNER_MARK_LENGTH = 10;
 
@@ -17,7 +20,7 @@ var INSTRUMENT = (function(x, y) {
 
 	const TRIANGLE_WIDTH = 20;
 	const TRIANGLE_HEIGHT = 15;
-	const TRIANGLE_X_OFFSET = 15;
+	const TRIANGLE_X_OFFSET = 20;
 	const TRIANGLE_PADDING = 10;
 
 	const TO_TEXT = "TO";
@@ -30,6 +33,7 @@ var INSTRUMENT = (function(x, y) {
 	const MAJOR_TICK_LENGTH = 7;
 	const TICK_TEXT_PADDING = 4;
 
+	const NEEDLE_WIDTH = 3;
 	const NEEDLE_LENGTH = SMALL_RADIUS * 2 - PADDING * 5;
 
 	const NEEDLE_ROTATION_MIN = Math.PI * 0.2;
@@ -52,7 +56,7 @@ var INSTRUMENT = (function(x, y) {
 		context.strokeStyle = '#000';
 
 		context.beginPath();
-		context.arc(centerX, centerY, SIZE / 2, 0, Math.PI * 2, false);
+		context.arc(centerX, centerY, CONTAINER_RADIUS, 0, Math.PI * 2, false);
 		context.stroke();
 		context.fill();
 
@@ -104,10 +108,10 @@ var INSTRUMENT = (function(x, y) {
 		context.lineTo(innerMarkX - TRIANGLE_WIDTH / 2, centerY - TRIANGLE_PADDING - TRIANGLE_HEIGHT);
 
 		context.closePath();
-		context.stroke();
+		// context.stroke();
 
 		// Draw FROM triangle
-		context.beginPath();
+		// context.beginPath();
 
 		context.moveTo(innerMarkX, centerY + TRIANGLE_PADDING);
 
@@ -127,7 +131,7 @@ var INSTRUMENT = (function(x, y) {
 		context.fillText(TO_TEXT, innerMarkX - TRIANGLE_WIDTH / 2 - textWidth / 2, centerY - TRIANGLE_PADDING - TRIANGLE_HEIGHT - TRIANGLE_PADDING / 2);
 
 		textWidth = context.measureText(FROM_TEXT).width;
-		context.fillText(FROM_TEXT, innerMarkX - TRIANGLE_WIDTH / 2 - textWidth / 2, centerY + TRIANGLE_PADDING + TRIANGLE_HEIGHT + DIR_FONT_SIZE);
+		context.fillText(FROM_TEXT, innerMarkX - TRIANGLE_WIDTH / 2 - textWidth / 2, centerY + TRIANGLE_PADDING + TRIANGLE_HEIGHT + TRIANGLE_PADDING / 2 + DIR_FONT_SIZE);
 
 		// Draw compass radial
 		// Draw tick marks
@@ -169,6 +173,8 @@ var INSTRUMENT = (function(x, y) {
 		// Draw needle
 		context.save();
 		context.translate(centerX, centerY - SMALL_RADIUS);
+
+		context.lineWidth = NEEDLE_WIDTH;
 
 		context.beginPath();
 		context.arc(0, SMALL_RADIUS, SMALL_RADIUS, 0, Math.PI * 2, false);
