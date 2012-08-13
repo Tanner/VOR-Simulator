@@ -124,6 +124,7 @@ var INSTRUMENT = (function(x, y) {
 
 		// Draw labels for triangles
 		var textWidth;
+
 		context.fillStyle = "#FFF";
 		context.font = DIR_FONT_SIZE + "px Helvetica";
 
@@ -197,9 +198,6 @@ var INSTRUMENT = (function(x, y) {
 
 		// Draw upper triangle
 		context.beginPath();
-
-		context.fillStyle = "#FFF";
-		context.strokeStyle = "#FFF";
 
 		context.moveTo(centerX, centerY - SMALL_RADIUS);
 		context.lineTo(centerX + INNER_MARK_LENGTH / 2, centerY - SMALL_RADIUS + INNER_MARK_LENGTH);
