@@ -26,18 +26,18 @@ var INSTRUMENT = (function(x, y) {
 		context.fillRect(self.x, self.y, SIZE, SIZE);
 		context.strokeRect(self.x, self.y, SIZE, SIZE);
 
-		var centerX = self.x + SIZE / 2;
-		var centerY = self.y + SIZE / 2;
+		const centerX = self.x + SIZE / 2;
+		const centerY = self.y + SIZE / 2;
 
 		// Draw large circles
-		var largeRadius = SIZE / 2 - PADDING * 2;
+		const largeRadius = SIZE / 2 - PADDING * 2;
 
 		context.beginPath();
 		context.arc(centerX, centerY, largeRadius, 0, Math.PI * 2, false);
 		context.stroke();
 
 		// Draw small circle
-		var smallRadius = largeRadius - 12 * 2;
+		const smallRadius = largeRadius - 12 * 2;
 		
 		context.beginPath();
 		context.arc(centerX, centerY, smallRadius, 0, Math.PI * 2, false);
@@ -85,7 +85,7 @@ var INSTRUMENT = (function(x, y) {
 		// Draw TO triangle
 		context.beginPath();
 
-		var innerMarkX = centerX + smallRadius - TRIANGLE_X_OFFSET;
+		const innerMarkX = centerX + smallRadius - TRIANGLE_X_OFFSET;
 
 		context.moveTo(innerMarkX, centerY - TRIANGLE_PADDING);
 
@@ -96,10 +96,8 @@ var INSTRUMENT = (function(x, y) {
 		context.closePath();
 		context.stroke();
 
-		// Draw TO triangle
+		// Draw FROM triangle
 		context.beginPath();
-
-		var innerMarkX = centerX + smallRadius - TRIANGLE_X_OFFSET;
 
 		context.moveTo(innerMarkX, centerY + TRIANGLE_PADDING);
 
