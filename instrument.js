@@ -2,7 +2,7 @@ var INSTRUMENT = (function(x, y) {
 	var self = {};
 
 	const SIZE = 200;
-	const PADDING = 5;
+	const PADDING = 3;
 
 	const LARGE_RADIUS = SIZE / 2 - PADDING * 2;
 	const SMALL_RADIUS = LARGE_RADIUS - 12 * 2;
@@ -44,19 +44,26 @@ var INSTRUMENT = (function(x, y) {
 	self.needleRotation = 0;
 
 	self.draw = function(context) {
-		// Draw container box
-		context.fillStyle = '#FFF';
-		context.strokeStyle = '#000';
-		context.fillRect(self.x, self.y, SIZE, SIZE);
-		context.strokeRect(self.x, self.y, SIZE, SIZE);
-
 		const centerX = self.x + SIZE / 2;
 		const centerY = self.y + SIZE / 2;
 
+		// Draw container box
+		context.fillStyle = '#FFF';
+		context.strokeStyle = '#000';
+
+		context.beginPath();
+		context.arc(centerX, centerY, SIZE / 2, 0, Math.PI * 2, false);
+		context.stroke();
+		context.fill();
+
 		// Draw large circles
+		context.fillStyle = '#000';
+		context.strokeStyle = '#FFF';
+
 		context.beginPath();
 		context.arc(centerX, centerY, LARGE_RADIUS, 0, Math.PI * 2, false);
 		context.stroke();
+		context.fill();
 
 		// Draw small circle
 		context.beginPath();
@@ -113,7 +120,7 @@ var INSTRUMENT = (function(x, y) {
 
 		// Draw labels for triangles
 		var textWidth;
-		context.fillStyle = "#000";
+		context.fillStyle = "#FFF";
 		context.font = DIR_FONT_SIZE + "px Helvetica";
 
 		textWidth = context.measureText(TO_TEXT).width;
