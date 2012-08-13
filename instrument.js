@@ -20,6 +20,10 @@ var INSTRUMENT = (function(x, y) {
 	const FROM_TEXT = "FR";
 	const DIR_FONT_SIZE = 12;
 
+	const NUM_MAJOR_TICKS = 12;
+	const MAJOR_TICK_LENGTH = 5;
+	const TICK_TEXT_PADDING = 4;
+
 	self.x = x;
 	self.y = y;
 
@@ -122,6 +126,26 @@ var INSTRUMENT = (function(x, y) {
 
 		textWidth = context.measureText(FROM_TEXT).width;
 		context.fillText(FROM_TEXT, innerMarkX - TRIANGLE_WIDTH / 2 - textWidth / 2, centerY + TRIANGLE_PADDING + TRIANGLE_HEIGHT + DIR_FONT_SIZE);
+
+		// Draw compass radial
+		// Draw tick marks
+		context.save();
+		context.translate(centerX, centerY);
+
+		for (var i = 0; i < NUM_MAJOR_TICKS; i++) {
+			if (i != 0) {
+				context.rotate(Math.PI * 2 / NUM_MAJOR_TICKS);
+			}
+
+			context.moveTo(0, -smallRadius);
+			context.lineTo(0, -smallRadius - MAJOR_TICK_LENGTH);
+			context.stroke();
+
+			var compassText = i * 360 / NUM_MAJOR_TICKS;
+			context.fillText(compassText, -context.measureText(compassText).width / 2, -smallRadius - MAJOR_TICK_LENGTH - TICK_TEXT_PADDING);
+		}
+
+		context.restore();
 	}
 
 	return self;
