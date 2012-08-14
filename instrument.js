@@ -42,6 +42,12 @@ var INSTRUMENT = (function(x, y) {
 	const NEEDLE_ROTATION_INPUT_MIN = -10;
 	const NEEDLE_ROTATION_INPUT_MAX = 10;
 
+	const OBS_CONTAINER_RADIUS = SIZE / 10;
+	const OBS_SPACING = 5;
+	const OBS_RADIUS = OBS_CONTAINER_RADIUS - OBS_SPACING;
+	const OBS_FONT_SIZE = 10;
+	const OBS_TEXT = "OBS";
+
 	self.x = x;
 	self.y = y;
 
@@ -214,6 +220,32 @@ var INSTRUMENT = (function(x, y) {
 		context.closePath();
 		context.fill();
 		context.stroke();
+		context.restore();
+
+		// Draw OBS
+		context.save();
+		context.translate(centerX - LARGE_RADIUS * 0.80, centerY + LARGE_RADIUS * 0.80);
+
+		context.beginPath();
+		context.fillStyle = '#000';
+		context.arc(0, 0, OBS_CONTAINER_RADIUS, 0, Math.PI * 2, false);
+		context.shadowOffsetX = 0;
+		context.shadowOffsetY = 0;
+		context.shadowBlur = 8;
+		context.shadowColor = 'rgba(0, 0, 0, 0.2)';
+		context.fill();
+
+		context.beginPath();
+		context.strokeStyle = '#FFF';
+		context.lineWidth = PADDING;
+		context.arc(0, 0, OBS_RADIUS, 0, Math.PI * 2, false);
+		context.stroke();
+
+		context.fillStyle = "#FFF";
+		context.font = "bold " + OBS_FONT_SIZE + "px Helvetica";
+
+		context.fillText(OBS_TEXT, -context.measureText(OBS_TEXT).width / 2, OBS_FONT_SIZE / 3);
+
 		context.restore();
 	}
 
