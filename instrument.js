@@ -249,6 +249,14 @@ var INSTRUMENT = (function(x, y) {
 		context.restore();
 	}
 
+	self.pointInOBSKnob = function(x, y) {
+		return dist(x, y, OBS_CENTER_X, OBS_CENTER_Y) <= OBS_CONTAINER_RADIUS;
+	}
+
+	function dist(x1, y1, x2, y2) {
+		return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+	}
+
 	function map(input, inputMin, inputMax, outputMin, outputMax) {
 		var inputSpan = inputMax - inputMin;
 		var outputSpan = outputMax - outputMin;
