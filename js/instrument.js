@@ -274,6 +274,24 @@ var INSTRUMENT = (function(x, y) {
 		updateCompassDial()
 	}
 
+	self.getPrimaryIndex = function() {
+		var rotation = self.compassDialRotation;
+
+		if (rotation > 0) {
+			while (rotation > Math.PI * 2) {
+				rotation -= Math.PI * 2;
+			}
+
+			return map(rotation, 0, Math.PI * 2, 359, 0);
+		} else {
+			while (rotation < Math.PI * -2) {
+				rotation += Math.PI * 2;
+			}
+
+			return map(rotation, Math.PI * -2, 0, 359, 0);
+		}
+	}
+
 	function updateCompassDial() {
 		self.compassDialRotation = self.obsKnobRotation * OBS_COMPASS_SCALE;
 	}
