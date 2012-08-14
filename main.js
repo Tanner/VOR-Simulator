@@ -44,13 +44,17 @@ function draw() {
 
 function onClick(event) {
 	if (event.which == 1) {
-		plane.move(event.pageX, event.pageY);
+		if (plane.pointInPlane(event.pageX, event.pageY)) {
+			plane.move(event.pageX, event.pageY);
+		}
 	}
 }
 
 function onMouseMove(event) {
 	if (event.which == 1) {
-		plane.move(event.pageX, event.pageY);
+		if (plane.pointInPlane(event.pageX, event.pageY)) {
+			plane.move(event.pageX, event.pageY);
+		}
 	}
 }
 

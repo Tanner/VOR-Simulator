@@ -49,5 +49,17 @@ var PLANE = (function(x, y, rotation) {
 		self.y = y;
 	}
 
+	self.pointInPlane = function(x, y) {
+		var boxSize = Math.max(WING_LENGTH, FUSELAGE_LENGTH + WING_FRONT_OFFSET);
+
+		if (x >= self.x - boxSize && x <= self.x + boxSize) {
+			if (y >= self.y - boxSize && y <= self.y + boxSize) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	return self;
 });
