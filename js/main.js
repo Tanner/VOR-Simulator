@@ -87,8 +87,6 @@ function repeatRotateKnob(x, y) {
 function updateVORFlags() {
 	var planeTo = vor.pointOnToSide(plane.x, plane.y);
 
-	console.log(planeTo);
-
 	instrument.to = planeTo;
 	instrument.from = !planeTo;
 }
