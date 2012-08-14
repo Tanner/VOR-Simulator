@@ -274,7 +274,7 @@ var INSTRUMENT = (function(x, y) {
 		updateCompassDial()
 	}
 
-	self.getConfinedCompassRotation = function() {
+	self.getConfinedCompassAngle = function() {
 		var rotation = self.compassDialRotation;
 
 		if (rotation > 0) {
