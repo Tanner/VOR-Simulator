@@ -44,9 +44,6 @@ function draw() {
 
 function onClick(event) {
 	if (event.which == 1) {
-		if (plane.pointInPlane(event.pageX, event.pageY)) {
-			plane.move(event.pageX, event.pageY);
-		}
 	}
 }
 
