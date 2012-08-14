@@ -44,6 +44,9 @@ function draw() {
 
 function onClick(event) {
 	if (event.which == 1) {
+		if (instrument.pointInOBSKnob(event.pageX, event.pageY)) {
+			instrument.mouseTurnKnob(event.pageX);
+		}
 	}
 }
 

@@ -54,10 +54,15 @@ var INSTRUMENT = (function(x, y) {
 	const OBS_FONT_SIZE = 10;
 	const OBS_TEXT = "OBS";
 
+	const OBS_TURN_AMOUNT = Math.PI / 30;
+	const OBS_COMPASS_SCALE = 0.2;
+
 	self.x = x;
 	self.y = y;
 
 	self.needleRotation = 0;
+	self.obsKnobRotation = 0;
+	self.compassDialRotation = 0;
 
 	self.draw = function(context) {
 		// Draw container box
@@ -140,10 +145,11 @@ var INSTRUMENT = (function(x, y) {
 		textWidth = context.measureText(FROM_TEXT).width;
 		context.fillText(FROM_TEXT, innerMarkX - TRIANGLE_WIDTH / 2 - textWidth / 2, CENTER_Y + TRIANGLE_PADDING + TRIANGLE_HEIGHT + TRIANGLE_PADDING / 2 + DIR_FONT_SIZE);
 
-		// Draw compass radial
+		// Draw compass dial
 		// Draw tick marks
 		context.save();
 		context.translate(CENTER_X, CENTER_Y);
+		context.rotate(self.compassDialRotation);
 
 		// Major
 		for (var i = 0; i < NUM_MAJOR_TICKS; i++) {
@@ -225,6 +231,7 @@ var INSTRUMENT = (function(x, y) {
 		// Draw OBS
 		context.save();
 		context.translate(OBS_CENTER_X, OBS_CENTER_Y);
+		context.rotate(self.obsKnobRotation);
 
 		context.beginPath();
 		context.fillStyle = '#000';
@@ -251,6 +258,22 @@ var INSTRUMENT = (function(x, y) {
 
 	self.pointInOBSKnob = function(x, y) {
 		return dist(x, y, OBS_CENTER_X, OBS_CENTER_Y) <= OBS_CONTAINER_RADIUS;
+	}
+
+	self.mouseTurnKnob = function(x) {
+		if (x < OBS_CENTER_X) {
+			// Turn knob to the left
+			self.obsKnobRotation -= OBS_TURN_AMOUNT;
+		} else {
+			// Turn knob to the right
+			self.obsKnobRotation += OBS_TURN_AMOUNT;
+		}
+
+		updateCompassDial()
+	}
+
+	function updateCompassDial() {
+		self.compassDialRotation = self.obsKnobRotation * OBS_COMPASS_SCALE;
 	}
 
 	function dist(x1, y1, x2, y2) {
