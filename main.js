@@ -2,6 +2,8 @@ var vor = null;
 var plane = null;
 var instrument = null;
 
+var clickTimerID = null;
+
 (function() {
 	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
                               window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
@@ -26,7 +28,8 @@ $(document).ready(function() {
 	plane = new PLANE($(window).width() / 3, $(window).height() / 3, 0);
 	instrument = new INSTRUMENT(200, 200);
 
-	$("#canvas").bind("click", onClick);
+	$("#canvas").bind("mousedown", onMouseDown);
+	$("#canvas").bind("mouseup", onMouseUp);
 	$("#canvas").bind("mousemove", onMouseMove);
 
 	requestAnimationFrame(draw);
@@ -42,12 +45,15 @@ function draw() {
 	requestAnimationFrame(draw);
 }
 
-function onClick(event) {
+function onMouseDown(event) {
 	if (event.which == 1) {
-		if (instrument.pointInOBSKnob(event.pageX, event.pageY)) {
-			instrument.mouseTurnKnob(event.pageX);
-		}
+		rotateKnob(event.pageX, event.pageY);
+		clickTimerID = window.setTimeout(repeatRotateKnob, 1500, event.pageX, event.pageY);
 	}
+}
+
+function onMouseUp(event) {
+	clearTimeout(clickTimerID);
 }
 
 function onMouseMove(event) {
@@ -56,6 +62,18 @@ function onMouseMove(event) {
 			plane.move(event.pageX, event.pageY);
 		}
 	}
+}
+
+function rotateKnob(x, y) {
+	if (instrument.pointInOBSKnob(x, y)) {
+		instrument.mouseTurnKnob(x);
+	}
+}
+
+function repeatRotateKnob(x, y) {
+	rotateKnob(x, y);
+
+	clickTimerID = window.setTimeout(repeatRotateKnob, 25, x, y);
 }
 
 function isCanvasSupported() {
