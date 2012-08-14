@@ -199,6 +199,7 @@ var INSTRUMENT = (function(x, y) {
 		context.restore();
 
 		// Draw upper triangle
+		context.save();
 		context.beginPath();
 
 		context.moveTo(centerX, centerY - SMALL_RADIUS);
@@ -213,6 +214,7 @@ var INSTRUMENT = (function(x, y) {
 		context.closePath();
 		context.fill();
 		context.stroke();
+		context.restore();
 	}
 
 	function map(input, inputMin, inputMax, outputMin, outputMax) {
