@@ -274,7 +274,7 @@ var INSTRUMENT = (function(x, y) {
 		updateCompassDial()
 	}
 
-	self.getPrimaryIndex = function() {
+	self.getConfinedCompassRotation = function() {
 		var rotation = self.compassDialRotation;
 
 		if (rotation > 0) {
@@ -282,12 +282,22 @@ var INSTRUMENT = (function(x, y) {
 				rotation -= Math.PI * 2;
 			}
 
-			return map(rotation, 0, Math.PI * 2, 359, 0);
+			return rotation;
 		} else {
 			while (rotation < Math.PI * -2) {
 				rotation += Math.PI * 2;
 			}
 
+			return rotation;
+		}
+	}
+
+	self.getPrimaryIndex = function() {
+		var rotation = getConfinedCompassRotation();
+
+		if (rotation > 0) {
+			return map(rotation, 0, Math.PI * 2, 359, 0);
+		} else {
 			return map(rotation, Math.PI * -2, 0, 359, 0);
 		}
 	}
