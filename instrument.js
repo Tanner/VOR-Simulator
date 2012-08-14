@@ -4,6 +4,9 @@ var INSTRUMENT = (function(x, y) {
 	const SIZE = 200;
 	const PADDING = 2;
 
+	const CENTER_X = x + SIZE / 2;
+	const CENTER_Y = y + SIZE / 2;
+
 	const NUMBER_GAP = 30;
 
 	const CONTAINER_RADIUS = SIZE / 2;
@@ -54,15 +57,12 @@ var INSTRUMENT = (function(x, y) {
 	self.needleRotation = 0;
 
 	self.draw = function(context) {
-		const centerX = self.x + SIZE / 2;
-		const centerY = self.y + SIZE / 2;
-
 		// Draw container box
 		context.fillStyle = '#FFF';
 		context.strokeStyle = '#000';
 
 		context.beginPath();
-		context.arc(centerX, centerY, CONTAINER_RADIUS, 0, Math.PI * 2, false);
+		context.arc(CENTER_X, CENTER_Y, CONTAINER_RADIUS, 0, Math.PI * 2, false);
 		context.stroke();
 		context.fill();
 
@@ -71,56 +71,56 @@ var INSTRUMENT = (function(x, y) {
 		context.strokeStyle = '#FFF';
 
 		context.beginPath();
-		context.arc(centerX, centerY, LARGE_RADIUS, 0, Math.PI * 2, false);
+		context.arc(CENTER_X, CENTER_Y, LARGE_RADIUS, 0, Math.PI * 2, false);
 		context.stroke();
 		context.fill();
 
 		// Draw small circle
 		context.beginPath();
-		context.arc(centerX, centerY, SMALL_RADIUS, 0, Math.PI * 2, false);
+		context.arc(CENTER_X, CENTER_Y, SMALL_RADIUS, 0, Math.PI * 2, false);
 		context.stroke();
 
 		// Draw center dot
 		context.beginPath();
-		context.arc(centerX, centerY, CENTER_DOT_RADIUS, 0, Math.PI * 2, false);
+		context.arc(CENTER_X, CENTER_Y, CENTER_DOT_RADIUS, 0, Math.PI * 2, false);
 		context.stroke();
 
 		// Draw small dots
 		context.beginPath();
 		for (var i = 0; i < NUM_SMALL_DOTS; i++) {
-			var x = centerX + CENTER_DOT_RADIUS + (SMALL_DOT_RADIUS * 2 + SMALL_DOT_PADDING) * (i + 1);
+			var x = CENTER_X + CENTER_DOT_RADIUS + (SMALL_DOT_RADIUS * 2 + SMALL_DOT_PADDING) * (i + 1);
 
-			context.moveTo(x, centerY);
-			context.arc(x, centerY, SMALL_DOT_RADIUS, 0, Math.PI * 2, false);
+			context.moveTo(x, CENTER_Y);
+			context.arc(x, CENTER_Y, SMALL_DOT_RADIUS, 0, Math.PI * 2, false);
 		}
 
 		for (var i = 0; i < NUM_SMALL_DOTS; i++) {
-			var x = centerX - CENTER_DOT_RADIUS - (SMALL_DOT_RADIUS * 2 + SMALL_DOT_PADDING) * (i + 1);
+			var x = CENTER_X - CENTER_DOT_RADIUS - (SMALL_DOT_RADIUS * 2 + SMALL_DOT_PADDING) * (i + 1);
 
-			context.moveTo(x, centerY);
-			context.arc(x, centerY, SMALL_DOT_RADIUS, 0, Math.PI * 2, false);
+			context.moveTo(x, CENTER_Y);
+			context.arc(x, CENTER_Y, SMALL_DOT_RADIUS, 0, Math.PI * 2, false);
 		}
 		context.stroke();
 
 		// Draw TO triangle
 		context.beginPath();
 
-		const innerMarkX = centerX + SMALL_RADIUS - TRIANGLE_X_OFFSET;
+		const innerMarkX = CENTER_X + SMALL_RADIUS - TRIANGLE_X_OFFSET;
 
-		context.moveTo(innerMarkX, centerY - TRIANGLE_PADDING);
+		context.moveTo(innerMarkX, CENTER_Y - TRIANGLE_PADDING);
 
-		context.lineTo(innerMarkX - TRIANGLE_WIDTH, centerY - TRIANGLE_PADDING);
+		context.lineTo(innerMarkX - TRIANGLE_WIDTH, CENTER_Y - TRIANGLE_PADDING);
 
-		context.lineTo(innerMarkX - TRIANGLE_WIDTH / 2, centerY - TRIANGLE_PADDING - TRIANGLE_HEIGHT);
+		context.lineTo(innerMarkX - TRIANGLE_WIDTH / 2, CENTER_Y - TRIANGLE_PADDING - TRIANGLE_HEIGHT);
 
 		context.closePath();
 
 		// Draw FROM triangle
-		context.moveTo(innerMarkX, centerY + TRIANGLE_PADDING);
+		context.moveTo(innerMarkX, CENTER_Y + TRIANGLE_PADDING);
 
-		context.lineTo(innerMarkX - TRIANGLE_WIDTH, centerY + TRIANGLE_PADDING);
+		context.lineTo(innerMarkX - TRIANGLE_WIDTH, CENTER_Y + TRIANGLE_PADDING);
 
-		context.lineTo(innerMarkX - TRIANGLE_WIDTH / 2, centerY + TRIANGLE_PADDING + TRIANGLE_HEIGHT);
+		context.lineTo(innerMarkX - TRIANGLE_WIDTH / 2, CENTER_Y + TRIANGLE_PADDING + TRIANGLE_HEIGHT);
 
 		context.closePath();
 		context.stroke();
@@ -132,15 +132,15 @@ var INSTRUMENT = (function(x, y) {
 		context.font = DIR_FONT_SIZE + "px Helvetica";
 
 		textWidth = context.measureText(TO_TEXT).width;
-		context.fillText(TO_TEXT, innerMarkX - TRIANGLE_WIDTH / 2 - textWidth / 2, centerY - TRIANGLE_PADDING - TRIANGLE_HEIGHT - TRIANGLE_PADDING / 2);
+		context.fillText(TO_TEXT, innerMarkX - TRIANGLE_WIDTH / 2 - textWidth / 2, CENTER_Y - TRIANGLE_PADDING - TRIANGLE_HEIGHT - TRIANGLE_PADDING / 2);
 
 		textWidth = context.measureText(FROM_TEXT).width;
-		context.fillText(FROM_TEXT, innerMarkX - TRIANGLE_WIDTH / 2 - textWidth / 2, centerY + TRIANGLE_PADDING + TRIANGLE_HEIGHT + TRIANGLE_PADDING / 2 + DIR_FONT_SIZE);
+		context.fillText(FROM_TEXT, innerMarkX - TRIANGLE_WIDTH / 2 - textWidth / 2, CENTER_Y + TRIANGLE_PADDING + TRIANGLE_HEIGHT + TRIANGLE_PADDING / 2 + DIR_FONT_SIZE);
 
 		// Draw compass radial
 		// Draw tick marks
 		context.save();
-		context.translate(centerX, centerY);
+		context.translate(CENTER_X, CENTER_Y);
 
 		// Major
 		for (var i = 0; i < NUM_MAJOR_TICKS; i++) {
@@ -176,7 +176,7 @@ var INSTRUMENT = (function(x, y) {
 
 		// Draw needle
 		context.save();
-		context.translate(centerX, centerY - SMALL_RADIUS);
+		context.translate(CENTER_X, CENTER_Y - SMALL_RADIUS);
 
 		context.beginPath();
 		context.arc(0, SMALL_RADIUS, SMALL_RADIUS, 0, Math.PI * 2, false);
@@ -205,9 +205,9 @@ var INSTRUMENT = (function(x, y) {
 		context.save();
 		context.beginPath();
 
-		context.moveTo(centerX, centerY - SMALL_RADIUS);
-		context.lineTo(centerX + INNER_MARK_LENGTH / 2, centerY - SMALL_RADIUS + INNER_MARK_LENGTH);
-		context.lineTo(centerX - INNER_MARK_LENGTH / 2, centerY - SMALL_RADIUS + INNER_MARK_LENGTH);
+		context.moveTo(CENTER_X, CENTER_Y - SMALL_RADIUS);
+		context.lineTo(CENTER_X + INNER_MARK_LENGTH / 2, CENTER_Y - SMALL_RADIUS + INNER_MARK_LENGTH);
+		context.lineTo(CENTER_X - INNER_MARK_LENGTH / 2, CENTER_Y - SMALL_RADIUS + INNER_MARK_LENGTH);
 
 		context.shadowOffsetX = 0;
 		context.shadowOffsetY = 5;
@@ -221,7 +221,7 @@ var INSTRUMENT = (function(x, y) {
 
 		// Draw OBS
 		context.save();
-		context.translate(centerX - LARGE_RADIUS * 0.80, centerY + LARGE_RADIUS * 0.80);
+		context.translate(CENTER_X - LARGE_RADIUS * 0.80, CENTER_Y + LARGE_RADIUS * 0.80);
 
 		context.beginPath();
 		context.fillStyle = '#000';
