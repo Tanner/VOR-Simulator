@@ -86,21 +86,21 @@ var INSTRUMENT = (function(x, y) {
 		context.stroke();
 
 		// Draw small dots
+		context.beginPath();
 		for (var i = 0; i < NUM_SMALL_DOTS; i++) {
 			var x = centerX + CENTER_DOT_RADIUS + (SMALL_DOT_RADIUS * 2 + SMALL_DOT_PADDING) * (i + 1);
 
-			context.beginPath();
+			context.moveTo(x, centerY);
 			context.arc(x, centerY, SMALL_DOT_RADIUS, 0, Math.PI * 2, false);
-			context.stroke();
 		}
 
 		for (var i = 0; i < NUM_SMALL_DOTS; i++) {
 			var x = centerX - CENTER_DOT_RADIUS - (SMALL_DOT_RADIUS * 2 + SMALL_DOT_PADDING) * (i + 1);
 
-			context.beginPath();
+			context.moveTo(x, centerY);
 			context.arc(x, centerY, SMALL_DOT_RADIUS, 0, Math.PI * 2, false);
-			context.stroke();
 		}
+		context.stroke();
 
 		// Draw TO triangle
 		context.beginPath();
@@ -114,11 +114,8 @@ var INSTRUMENT = (function(x, y) {
 		context.lineTo(innerMarkX - TRIANGLE_WIDTH / 2, centerY - TRIANGLE_PADDING - TRIANGLE_HEIGHT);
 
 		context.closePath();
-		context.stroke();
 
 		// Draw FROM triangle
-		context.beginPath();
-
 		context.moveTo(innerMarkX, centerY + TRIANGLE_PADDING);
 
 		context.lineTo(innerMarkX - TRIANGLE_WIDTH, centerY + TRIANGLE_PADDING);
