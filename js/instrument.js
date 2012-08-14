@@ -30,6 +30,8 @@ var INSTRUMENT = (function(x, y) {
 	const FROM_TEXT = "FR";
 	const DIR_FONT_SIZE = 12;
 
+	const NUM_DEGREES = 360;
+
 	const NUM_INNER_TICKS = 8;
 
 	const NUM_MAJOR_TICKS = 12;
@@ -161,7 +163,7 @@ var INSTRUMENT = (function(x, y) {
 			context.lineTo(0, -SMALL_RADIUS - MAJOR_TICK_LENGTH);
 			context.stroke();
 
-			var compassText = i * 360 / NUM_MAJOR_TICKS;
+			var compassText = i * NUM_DEGREES / NUM_MAJOR_TICKS;
 			compassText = compassText.toString().substr(0, 2);
 			context.fillText(compassText, -context.measureText(compassText).width / 2, -SMALL_RADIUS - MAJOR_TICK_LENGTH - TICK_TEXT_PADDING);
 		}
@@ -172,7 +174,7 @@ var INSTRUMENT = (function(x, y) {
 				context.rotate(Math.PI * 2 / (NUM_MAJOR_TICKS * 4));
 			}
 
-			if (i % (360 / NUM_MAJOR_TICKS) == 0) {
+			if (i % (NUM_DEGREES / NUM_MAJOR_TICKS) == 0) {
 				continue;
 			}
 
