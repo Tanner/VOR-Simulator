@@ -34,6 +34,8 @@ $(document).ready(function() {
 	$("#canvas").bind("mouseup", onMouseUp);
 	$("#canvas").bind("mousemove", onMouseMove);
 
+	updateVORFlags();
+
 	requestAnimationFrame(draw);
 });
 
@@ -62,6 +64,7 @@ function onMouseMove(event) {
 	if (event.which == 1) {
 		if (plane.pointInPlane(event.pageX, event.pageY)) {
 			plane.move(event.pageX, event.pageY);
+			updateVORFlags();
 		}
 	}
 }
@@ -71,6 +74,7 @@ function rotateKnob(x, y) {
 		instrument.mouseTurnKnob(x);
 
 		vor.setPrimaryIndex(instrument.getConfinedCompassAngle());
+		updateVORFlags();
 	}
 }
 
@@ -78,6 +82,15 @@ function repeatRotateKnob(x, y) {
 	rotateKnob(x, y);
 
 	clickTimerID = window.setTimeout(repeatRotateKnob, 25, x, y);
+}
+
+function updateVORFlags() {
+	var planeTo = vor.pointOnToSide(plane.x, plane.y);
+
+	console.log(planeTo);
+
+	instrument.to = planeTo;
+	instrument.from = !planeTo;
 }
 
 function isCanvasSupported() {
