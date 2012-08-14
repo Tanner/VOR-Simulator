@@ -62,6 +62,9 @@ var INSTRUMENT = (function(x, y) {
 	self.x = x;
 	self.y = y;
 
+	self.to = false;
+	self.from = false;
+
 	self.needleRotation = 0;
 	self.obsKnobRotation = 0;
 	self.compassDialRotation = 0;
@@ -112,10 +115,12 @@ var INSTRUMENT = (function(x, y) {
 		}
 		context.stroke();
 
+		// Draw triangles
+		context.fillStyle = '#FFF';
+		const innerMarkX = CENTER_X + SMALL_RADIUS - TRIANGLE_X_OFFSET;
+		
 		// Draw TO triangle
 		context.beginPath();
-
-		const innerMarkX = CENTER_X + SMALL_RADIUS - TRIANGLE_X_OFFSET;
 
 		context.moveTo(innerMarkX, CENTER_Y - TRIANGLE_PADDING);
 
@@ -125,7 +130,13 @@ var INSTRUMENT = (function(x, y) {
 
 		context.closePath();
 
+		if (self.to) {
+			context.fill();
+		}
+		context.stroke();
+
 		// Draw FROM triangle
+		context.beginPath();
 		context.moveTo(innerMarkX, CENTER_Y + TRIANGLE_PADDING);
 
 		context.lineTo(innerMarkX - TRIANGLE_WIDTH, CENTER_Y + TRIANGLE_PADDING);
@@ -133,6 +144,10 @@ var INSTRUMENT = (function(x, y) {
 		context.lineTo(innerMarkX - TRIANGLE_WIDTH / 2, CENTER_Y + TRIANGLE_PADDING + TRIANGLE_HEIGHT);
 
 		context.closePath();
+
+		if (self.from) {
+			context.fill();
+		}
 		context.stroke();
 
 		// Draw labels for triangles
