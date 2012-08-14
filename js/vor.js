@@ -4,8 +4,17 @@ var VOR = (function(x, y) {
 	const DOT_RADIUS = 5;
 	const HEXAGON_RADIUS = 20;
 
+	const DEBUG_LINE_LENGTH = 300;
+	const DEBUG_TO_TEXT = "TO";
+	const DEBUG_FR_TEXT = "FR";
+	const DEBUG_FONT_SIZE = 12;
+
 	self.x = x;
 	self.y = y;
+
+	self.radialAngle = 0;
+
+	self.drawDebug = true;
 
 	self.draw = function(context) {
 		context.fillStyle = '#000';
@@ -26,6 +35,34 @@ var VOR = (function(x, y) {
 		context.lineTo(x + HEXAGON_RADIUS, y);
 
 		context.stroke();
+
+		if (self.drawDebug) {
+			context.save();
+			context.translate(x, y);
+			context.rotate(self.radialAngle);
+
+			context.font = DEBUG_FONT_SIZE + "px Helvetica";
+
+			context.beginPath();
+			context.strokeStyle = '#F00';
+			context.moveTo(0, 0);
+			context.lineTo(0, DEBUG_LINE_LENGTH);
+			context.stroke();
+			context.fillText(DEBUG_FR_TEXT, -context.measureText(DEBUG_FR_TEXT).width / 2, DEBUG_LINE_LENGTH + DEBUG_FONT_SIZE * 2);
+
+			context.beginPath();
+			context.strokeStyle = '#0F0';
+			context.moveTo(0, 0);
+			context.lineTo(0, -DEBUG_LINE_LENGTH);
+			context.stroke();
+			context.fillText(DEBUG_TO_TEXT, -context.measureText(DEBUG_TO_TEXT).width / 2, -DEBUG_LINE_LENGTH - DEBUG_FONT_SIZE);
+
+			context.restore();
+		}
+	}
+
+	self.setPrimaryIndex = function(radian) {
+		self.radialAngle = radian;
 	}
 
 	return self;

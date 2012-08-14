@@ -69,6 +69,8 @@ function onMouseMove(event) {
 function rotateKnob(x, y) {
 	if (instrument.pointInOBSKnob(x, y)) {
 		instrument.mouseTurnKnob(x);
+
+		vor.setPrimaryIndex(instrument.getConfinedCompassAngle());
 	}
 }
 
