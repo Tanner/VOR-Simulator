@@ -45,6 +45,9 @@ var INSTRUMENT = (function(x, y) {
 	const NEEDLE_ROTATION_INPUT_MIN = -10;
 	const NEEDLE_ROTATION_INPUT_MAX = 10;
 
+	const OBS_CENTER_X = CENTER_X - LARGE_RADIUS * 0.80;
+	const OBS_CENTER_Y = CENTER_Y + LARGE_RADIUS * 0.80;
+
 	const OBS_CONTAINER_RADIUS = SIZE / 10;
 	const OBS_SPACING = 5;
 	const OBS_RADIUS = OBS_CONTAINER_RADIUS - OBS_SPACING;
@@ -221,7 +224,7 @@ var INSTRUMENT = (function(x, y) {
 
 		// Draw OBS
 		context.save();
-		context.translate(CENTER_X - LARGE_RADIUS * 0.80, CENTER_Y + LARGE_RADIUS * 0.80);
+		context.translate(OBS_CENTER_X, OBS_CENTER_Y);
 
 		context.beginPath();
 		context.fillStyle = '#000';
