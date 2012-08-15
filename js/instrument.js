@@ -65,7 +65,7 @@ var INSTRUMENT = (function(x, y) {
 	self.to = false;
 	self.from = false;
 
-	self.needleRotation = 0;
+	self.needleAngle = 0;
 	self.obsKnobRotation = 0;
 	self.compassDialRotation = 0;
 
@@ -210,7 +210,7 @@ var INSTRUMENT = (function(x, y) {
 
 		context.beginPath();
 
-		var rotationAmount = map(self.needleRotation, NEEDLE_ROTATION_INPUT_MIN, NEEDLE_ROTATION_INPUT_MAX, NEEDLE_ROTATION_MIN, NEEDLE_ROTATION_MAX);
+		var rotationAmount = map(self.needleAngle, NEEDLE_ROTATION_INPUT_MIN, NEEDLE_ROTATION_INPUT_MAX, NEEDLE_ROTATION_MIN, NEEDLE_ROTATION_MAX);
 		context.rotate(rotationAmount);
 
 		context.moveTo(0, 0);
@@ -290,7 +290,7 @@ var INSTRUMENT = (function(x, y) {
 	}
 
 	self.setNeedleAngle = function(angle) {
-		self.needleRotation = map(angle, -Math.PI / 4, Math.PI / 4, NEEDLE_ROTATION_MIN, NEEDLE_ROTATION_MAX);
+		self.needleAngle = map(angle, -Math.PI / 4, Math.PI / 4, NEEDLE_ROTATION_MIN, NEEDLE_ROTATION_MAX);
 	}
 
 	self.getConfinedCompassAngle = function() {
