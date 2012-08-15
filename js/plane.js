@@ -8,7 +8,7 @@ var PLANE = (function(x, y, rotation) {
 	const WING_FRONT_OFFSET = 10;
 	const ELEVATOR_BACK_OFFSET = 5;
 
-	const LINE_WIDTH = 5;
+	const LINE_WIDTH = 3;
 
 	self.x = x;
 	self.y = y;
