@@ -41,11 +41,8 @@ var INSTRUMENT = (function(x, y) {
 	const NEEDLE_WIDTH = 3;
 	const NEEDLE_LENGTH = SMALL_RADIUS * 2 - PADDING * 5;
 
-	const NEEDLE_ROTATION_MIN = Math.PI * 0.5;
-	const NEEDLE_ROTATION_MAX = Math.PI * -0.5;
-
-	const NEEDLE_ROTATION_INPUT_MIN = -10;
-	const NEEDLE_ROTATION_INPUT_MAX = 10;
+	const NEEDLE_ROTATION_MIN = Math.PI * 0.2;
+	const NEEDLE_ROTATION_MAX = Math.PI * -0.2;
 
 	const OBS_CENTER_X = CENTER_X - LARGE_RADIUS * 0.80;
 	const OBS_CENTER_Y = CENTER_Y + LARGE_RADIUS * 0.80;
@@ -58,6 +55,8 @@ var INSTRUMENT = (function(x, y) {
 
 	const OBS_TURN_AMOUNT = Math.PI / 30;
 	const OBS_COMPASS_SCALE = 0.2;
+
+	const NEEDLE_ANGLE_LIMIT = 45 * Math.PI / 180;
 
 	self.x = x;
 	self.y = y;
@@ -210,8 +209,7 @@ var INSTRUMENT = (function(x, y) {
 
 		context.beginPath();
 
-		var rotationAmount = map(self.needleAngle, NEEDLE_ROTATION_INPUT_MIN, NEEDLE_ROTATION_INPUT_MAX, NEEDLE_ROTATION_MIN, NEEDLE_ROTATION_MAX);
-		context.rotate(rotationAmount);
+		context.rotate(self.needleAngle);
 
 		context.moveTo(0, 0);
 		context.lineTo(0, NEEDLE_LENGTH);
@@ -290,7 +288,10 @@ var INSTRUMENT = (function(x, y) {
 	}
 
 	self.setNeedleAngle = function(angle) {
-		self.needleAngle = map(angle, -Math.PI / 4, Math.PI / 4, NEEDLE_ROTATION_MIN, NEEDLE_ROTATION_MAX);
+		angle = Math.min(angle, NEEDLE_ANGLE_LIMIT);
+		angle = Math.max(angle, -NEEDLE_ANGLE_LIMIT);
+
+		self.needleAngle = map(angle, -NEEDLE_ANGLE_LIMIT, NEEDLE_ANGLE_LIMIT, NEEDLE_ROTATION_MIN, NEEDLE_ROTATION_MAX);
 	}
 
 	self.getConfinedCompassAngle = function() {
