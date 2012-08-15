@@ -8,6 +8,8 @@ var PLANE = (function(x, y, rotation) {
 	const WING_FRONT_OFFSET = 10;
 	const ELEVATOR_BACK_OFFSET = 5;
 
+	const LINE_WIDTH = 5;
+
 	self.x = x;
 	self.y = y;
 	self.rotation = rotation;
@@ -16,6 +18,7 @@ var PLANE = (function(x, y, rotation) {
 		context.save();
 		context.translate(this.x, this.y);
 		context.strokeStyle = '#000';
+		context.lineWidth = LINE_WIDTH;
 
 		if (rotation != 0) {
 			context.rotate(this.rotation);
@@ -38,7 +41,7 @@ var PLANE = (function(x, y, rotation) {
 		context.shadowOffsetX = 15;
 		context.shadowOffsetY = 15;
 		context.shadowBlur = 8;
-		context.shadowColor = 'rgba(0, 0, 0, 1)';
+		context.shadowColor = 'rgba(0, 0, 0, 0.5)';
 
 		context.stroke();
 		context.restore();

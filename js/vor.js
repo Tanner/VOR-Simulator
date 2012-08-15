@@ -9,6 +9,8 @@ var VOR = (function(x, y) {
 	const DEBUG_FR_TEXT = "FR";
 	const DEBUG_FONT_SIZE = 12;
 
+	const LINE_WIDTH = 3;
+
 	self.x = x;
 	self.y = y;
 
@@ -17,8 +19,11 @@ var VOR = (function(x, y) {
 	self.drawDebug = false;
 
 	self.draw = function(context) {
+		context.save();
+
 		context.fillStyle = '#000';
 		context.strokeStyle = '#000';
+		context.lineWidth = LINE_WIDTH;
 
 		context.beginPath();
 		context.arc(x, y, DOT_RADIUS, 0, Math.PI * 2, true);
@@ -59,6 +64,8 @@ var VOR = (function(x, y) {
 
 			context.restore();
 		}
+
+		context.restore();
 	}
 
 	self.pointOnToSide = function(x, y) {
