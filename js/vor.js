@@ -73,6 +73,36 @@ var VOR = (function(x, y) {
 		return ((x1 - x) * (y2 - y) - (y1 - y) * (x2 - x)) < 0;
 	}
 
+	self.angleFromRadial = function(x, y) {
+		if (self.pointOnToSide(x, y)) {
+			var toX = self.x + Math.sin(self.radialAngle);
+
+			var opp = x - toX;
+			var adj = y - self.y;
+
+			if (opp < 0) {
+				return Math.atan(opp / adj);
+			} else if (opp > 0) {
+				return Math.atan(opp / adj);
+			} else {
+				return 0;
+			}
+		} else {
+			var fromX = self.x - Math.sin(self.radialAngle);
+
+			var opp = x - fromX;
+			var adj = y - self.y;
+
+			if (opp < 0) {
+				return -Math.atan(opp / adj);
+			} else if (opp > 0) {
+				return -Math.atan(opp / adj);
+			} else {
+				return 0;
+			}
+		}
+	}
+
 	self.setPrimaryIndex = function(radian) {
 		self.radialAngle = radian;
 	}
