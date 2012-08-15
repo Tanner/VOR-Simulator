@@ -14,7 +14,7 @@ var VOR = (function(x, y) {
 
 	self.radialAngle = 0;
 
-	self.drawDebug = true;
+	self.drawDebug = false;
 
 	self.draw = function(context) {
 		context.fillStyle = '#000';
