@@ -27,7 +27,7 @@ $(document).ready(function() {
 	const PADDING = 25;
 
 	vor = new VOR($(window).width() / 2, $(window).height() / 2);
-	plane = new PLANE($(window).width() / 3, $(window).height() / 3, 0);
+	plane = new PLANE($(window).width() / 2, $(window).height() * 0.75, 0);
 	instrument = new INSTRUMENT($(window).width() - 200 - PADDING, PADDING);
 
 	$("#canvas").bind("mousedown", onMouseDown);
