@@ -64,11 +64,11 @@ var VOR = (function(x, y) {
 	self.pointOnToSide = function(x, y) {
 		var anglePerpendicular = self.radialAngle + Math.PI / 2;
 
-		var x1 = self.x - Math.sin(anglePerpendicular) * 100;
-		var y1 = self.y + Math.cos(anglePerpendicular) * 100;
+		var x1 = self.x - Math.sin(anglePerpendicular);
+		var y1 = self.y + Math.cos(anglePerpendicular);
 
-		var x2 = self.x + Math.sin(anglePerpendicular) * 100;
-		var y2 = self.y - Math.cos(anglePerpendicular) * 100;
+		var x2 = self.x + Math.sin(anglePerpendicular);
+		var y2 = self.y - Math.cos(anglePerpendicular);
 
 		return ((x1 - x) * (y2 - y) - (y1 - y) * (x2 - x)) < 0;
 	}
