@@ -35,6 +35,7 @@ $(document).ready(function() {
 	$("#canvas").bind("mousemove", onMouseMove);
 
 	updateVORFlags();
+	updateVORNeedle();
 
 	requestAnimationFrame(draw);
 });
