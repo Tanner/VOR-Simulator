@@ -41,8 +41,8 @@ var INSTRUMENT = (function(x, y) {
 	const NEEDLE_WIDTH = 3;
 	const NEEDLE_LENGTH = SMALL_RADIUS * 2 - PADDING * 5;
 
-	const NEEDLE_ROTATION_MIN = Math.PI * 0.2;
-	const NEEDLE_ROTATION_MAX = Math.PI * -0.2;
+	const NEEDLE_ROTATION_MIN = Math.PI * 0.5;
+	const NEEDLE_ROTATION_MAX = Math.PI * -0.5;
 
 	const NEEDLE_ROTATION_INPUT_MIN = -10;
 	const NEEDLE_ROTATION_INPUT_MAX = 10;
@@ -287,6 +287,10 @@ var INSTRUMENT = (function(x, y) {
 		}
 
 		updateCompassDial()
+	}
+
+	self.setNeedleAngle = function(angle) {
+		self.needleRotation = map(angle, -Math.PI / 4, Math.PI / 4, NEEDLE_ROTATION_MIN, NEEDLE_ROTATION_MAX);
 	}
 
 	self.getConfinedCompassAngle = function() {

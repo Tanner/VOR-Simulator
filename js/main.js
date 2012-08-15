@@ -64,7 +64,9 @@ function onMouseMove(event) {
 	if (event.which == 1) {
 		if (plane.pointInPlane(event.pageX, event.pageY)) {
 			plane.move(event.pageX, event.pageY);
+
 			updateVORFlags();
+			updateVORNeedle();
 		}
 	}
 }
@@ -74,7 +76,9 @@ function rotateKnob(x, y) {
 		instrument.mouseTurnKnob(x);
 
 		vor.setPrimaryIndex(instrument.getConfinedCompassAngle());
+
 		updateVORFlags();
+		updateVORNeedle();
 	}
 }
 
@@ -89,6 +93,12 @@ function updateVORFlags() {
 
 	instrument.to = planeTo;
 	instrument.from = !planeTo;
+}
+
+function updateVORNeedle() {
+	var angle = vor.angleFromRadial(plane.x, plane.y);
+
+	instrument.setNeedleAngle(angle);
 }
 
 function isCanvasSupported() {
